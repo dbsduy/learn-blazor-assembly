@@ -1,6 +1,5 @@
 ﻿@using LearnBlazorV1.Types
-
-<button class="btn @ButtonClass" type="@Type" onclick="@OnClick">
+<button class="btn btn-primary" type="@Type" onclick="@OnClick">
     @if (isLoading)
     {
         <Loading />
@@ -12,13 +11,9 @@
 </button>
 
 @code {
-
-
     [Parameter] public string Label { get; set; }
     [Parameter] public string Type { get; set; }
     [Parameter] public bool isLoading { get; set; }
     [Parameter] public EventCallback OnClick { get; set; }
-    [Parameter] public ButtonStyle ButtonStyle { get; set; } = ButtonStyle.Primary;
-
 
 }

@@ -3,8 +3,7 @@
 @using LearnBlazorV1.Components.Dialogs
 @page "/user/{Id}"
 
-
-<PageTitle>@User.Name</PageTitle>
+<PageTitle>@(User != null ? User.Name : "Loading...")</PageTitle>
 
 <a href="/user-manager">Back to List</a>
 <div class="container mt-5">
@@ -12,7 +11,7 @@
         <div class="card-header">
             User Information
         </div>
-        @if (isLoading && User == null)
+        @if (isLoading)
         {
             <Loading />
         }
