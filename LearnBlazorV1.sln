@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnBlazorV1", "LearnBlazorV1.csproj", "{AA178292-3BB3-4D74-B898-169EA7AEBD4F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListApi", "..\TodoListApi\TodoListApi.csproj", "{08762F77-C113-4989-A209-DCC274D59ED7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AA178292-3BB3-4D74-B898-169EA7AEBD4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA178292-3BB3-4D74-B898-169EA7AEBD4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA178292-3BB3-4D74-B898-169EA7AEBD4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA178292-3BB3-4D74-B898-169EA7AEBD4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08762F77-C113-4989-A209-DCC274D59ED7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08762F77-C113-4989-A209-DCC274D59ED7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08762F77-C113-4989-A209-DCC274D59ED7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08762F77-C113-4989-A209-DCC274D59ED7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8557070F-3949-441E-8721-F50DDADE37B5}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,84 @@
+﻿@using LearnBlazorV1.Components
+@using LearnBlazorV1.Components.Buttons
+@using LearnBlazorV1.Components.Dialogs
+@page "/user/{Id}"
+
+
+<PageTitle>@User.Name</PageTitle>
+
+<a href="/user-manager">Back to List</a>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            User Information
+        </div>
+        @if (isLoading && User == null)
+        {
+            <Loading />
+        }
+        else
+        {
+            <EditForm Model="@UserForm" class="card-body" OnValidSubmit="@UpdateUserAsync">
+                <DataAnnotationsValidator />
+                <div class="mb-3">
+                    <label class="form-label">ID</label>
+                    <div class="h5 fw-bold">@User.Id</div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+
+                    @if (isEdited)
+                    {
+                        <input class="form-control" @bind-value="UserForm.Name" />
+                        <ValidationMessage For="@(() => UserForm.Name)" />
+                    }
+                    else
+                    {
+                        <div class="h5 fw-bold">@User.Name</div>
+                    }
+
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    @if (isEdited)
+                    {
+                        <input class="form-control" @bind-value="UserForm.Email" />
+                        <ValidationMessage For="@(() => UserForm.Email)" />
+                    }
+                    else
+                    {
+                        <div class="h5 fw-bold">@User.Email</div>
+                    }
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Age</label>
+                    @if (isEdited)
+                    {
+                        <input class="form-control" @bind-value="UserForm.Age" />
+                        <ValidationMessage For="@(() => UserForm.Age)" />
+                    }
+                    else
+                    {
+                        <div class="h5 fw-bold">@User.Age</div>
+
+                    }
+                </div>
+
+                <div class="d-flex" style="gap: 10px">
+                    @if (isEdited)
+                    {
+                        <Button Label="Update" Type="submit" isLoading="@isLoading" />
+                        <button type="button" class="btn btn-dark" onclick="@ToggleEditUser">Cancel</button>
+                    }
+                    else
+                    {
+                        <Button Label="Edit information" Type="button" OnClick="@ToggleEditUser" />
+                        <button type="button" class="btn btn-danger" id="deleteButton" onclick="@ToggleDeleteConfirm">Delete</button>
+                    }
+                </div>
+            </EditForm>
+        }
+    </div>
+    <DeleteUserDialog User="@User" IsOpen="@isDeleteConfirm" OnClose="@ToggleDeleteConfirm" />
+</div>
+

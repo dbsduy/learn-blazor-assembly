@@ -1,0 +1,59 @@
+﻿@using LearnBlazorV1.Components
+@using LearnBlazorV1.Components.Dialogs
+
+@page "/user-manager"
+
+<PageTitle>User Manager</PageTitle>
+
+<div class="d-flex px-5 align-items-center mb-3">
+    <h3>UserManager</h3>
+    <button class="btn btn-primary col-2 mx-5" type="button" onclick="@ToggleAddUser">Add user</button>
+</div>
+
+<EditForm Model="@UserFilter" class="row" style="gap:10px" OnSubmit="FilterUserAsync">
+    <input placeholder="Name" class="col-3" @bind-value="@UserFilter.Name" />
+    <input placeholder="Age" class="col-3" @bind-value="@UserFilter.Age" />
+    <input placeholder="Email" class="col-3" @bind-value="@UserFilter.Email" />
+    <button class="btn btn-primary col-2" type="submit">Filter user</button>
+</EditForm>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (isLoading)
+        {
+            <Loading />
+        }
+        else
+        {
+            if (Users.Count() == 0)
+            {
+                <tr>
+                    <td colspan="4" class="text-center">No data</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var user in Users)
+                {
+                    <tr @onclick="() => GoToDetails(user.Id)" style="cursor:pointer">
+                        <th scope="row">@user.Id</th>
+                        <td>@user.Name</td>
+                        <td>@user.Age</td>
+                        <td>@user.Email</td>
+                    </tr>
+                }
+            }
+
+        }
+    </tbody>
+</table>
+
+<AddUserDialog isOpenAddUser="@isOpenAddUser" OnClose="@ToggleAddUser" OnReloadList="@FilterUserAsync" />

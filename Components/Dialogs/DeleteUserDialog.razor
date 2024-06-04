@@ -1,0 +1,32 @@
+﻿@using LearnBlazorV1.Services
+@using LearnBlazorV1.Components.Buttons
+@using LearnBlazorV1.Types
+
+@inject IUserApi UserApi
+@inject NavigationManager NavigationManager
+
+<Dialog IsOpen="@IsOpen" OnClose="@OnClose">
+    <h4 class="text-center">Delete user</h4>
+    <p class="text-center">Do you really want to delete @User.Name?</p>
+    <div class="d-flex mx-auto justify-content-center" style="gap:20px">
+        <Button Label="Yes" OnClick="@OnDelete" isLoading="@isLoading" />
+        <Button Label="No" OnClick="@OnClose" />
+    </div>
+</Dialog>
+
+@code {
+    [Parameter] public bool IsOpen { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public UserType User { get; set; }
+
+    private bool isLoading = false;
+
+    private async Task OnDelete()
+    {
+        await UserApi.DeleteUser(User.Id);
+        NavigationManager.NavigateTo("/user-manager");
+    }
+
+
+}
+

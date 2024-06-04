@@ -1,0 +1,65 @@
+﻿@using LearnBlazorV1.Services
+@using LearnBlazorV1.Types
+@using LearnBlazorV1.Components.Buttons
+
+@inject IUserApi UserApi;
+
+<Dialog IsOpen="@isOpenAddUser" OnClose="@OnClose">
+    <h4 class="text-center">Add new user</h4>
+
+    <EditForm Model="@UserForm" class="d-flex flex-column" style="gap:10px" OnValidSubmit="@AddUser">
+        <DataAnnotationsValidator />
+        <div>
+            <label for="inputPassword5">Name</label>
+            <input type="text" class="form-control" @bind-value="@UserForm.Name">
+            <ValidationMessage For="@(() => UserForm.Name)" />
+        </div>
+        <div>
+            <label for="inputPassword5">Email</label>
+            <input type="text" class="form-control" @bind-value="@UserForm.Email">
+            <ValidationMessage For="@(() => UserForm.Email)" />
+        </div>
+        <div>
+            <label for="inputPassword5">Age</label>
+            <input type="text" class="form-control" @bind-value="@UserForm.Age">
+            <ValidationMessage For="@(() => UserForm.Age)" />
+        </div>
+        <Button Label="Create New" Type="ButtonType.Type.Submit" isLoading="@isLoading" />
+    </EditForm>
+</Dialog>
+
+@code {
+    [Parameter] public bool isOpenAddUser { get; set; }
+    [Parameter] public EventCallback OnClose { get; set; }
+    [Parameter] public EventCallback OnReloadList { get; set; }
+
+    private UserForm UserForm = new UserForm();
+
+    private bool isLoading = false;
+
+    private async Task AddUser()
+    {
+        isLoading = true;
+        var result = await UserApi.CreateNewUser(UserForm);
+        if (!string.IsNullOrEmpty(result.Id))
+        {
+            OnReloadList.InvokeAsync();
+            OnClose.InvokeAsync();
+        }
+        isLoading = false;
+
+    }
+    private void ClearForm()
+    {
+        UserForm = new UserForm();
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (isOpenAddUser)
+        {
+            ClearForm();
+        }
+    }
+}
+
