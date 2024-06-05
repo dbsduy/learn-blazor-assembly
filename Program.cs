@@ -9,6 +9,6 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddTransient<IUserApi, UserApi>();
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://ca00da7efdf61fdf6f7f.free.beeceptor.com") });
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.Configuration["ApiUrl"]) });
 
 await builder.Build().RunAsync();

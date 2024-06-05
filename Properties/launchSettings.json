@@ -9,6 +9,17 @@
     }
   },
   "profiles": {
+    "Watch": {
+      "commandName": "Executable",
+      "executablePath": "dotnet.exe",
+      "workingDirectory": "$(SProjectDir)",
+      "commandLineArgs": "watch run",
+      "launchBrowser": false,
+      "launchUrl": "http://localhost:6868/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
     "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
